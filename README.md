@@ -135,7 +135,7 @@ CUDA_VISIBLE_DEVICES=0,1,2,3 python3 -m torch.distributed.launch main.py transfo
 ### 3.1. Predict DNAm levels of CpG sites from DNA sequences with reference allele using one GPU.
 ### Example
 ```bash
-predict DNAm levels of CpG sites from DNA sequences with reference allel for L23 using the finetuned INTERACT model
+predict DNAm levels of CpG sites from DNA sequences with reference allele for L23 using the finetuned INTERACT model
 
 CUDA_VISIBLE_DEVICES=0 python3 main.py transformer array_mQTL_regression \
 	--exp_name array_mQTL_regression \
