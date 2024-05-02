@@ -1,16 +1,33 @@
 #
 This repository contains codes to predict DNA methylation regulatory variants in specific brain cell types.
 
-## Install
-Install PyTorch following instructions from https://pytorch.org/ and apex by following https://github.com/NVIDIA/apex.
+# Hardware requirements
+scMeformer package requires only a standard computer with GPUs and enough RAM to support the in-memory operations.
 
-## Usage
 
-1. Pretraining
+# Software requirements
+## OS Requirements
+This package is supported by Linux. The package has been tested on Rocky Linux 9.2.
 
-1.1. Calculates methylations for CpGs by cells from neuron or glia
+## Python Dependencies
+scMeformer mainly depends on the following Python packages. <br/>
+PyTorch <br/>
+apex <br/>
+numpy <br/>
+scipy <br/>
+scikit-learn <br/>
+pandas <br/>
+loompy <br/>
+json <br/>
+h5py
 
-#Example
+# Usage
+
+## 1. Pretraining
+
+### 1.1. Calculate DNAm levels for CpG sites in pseudo-bulk of neuronal or glial cells.
+
+### Example
 ```bash
 Construct training data and validation data for neuron to prerain INTERACT model.
 
@@ -18,7 +35,7 @@ $python run_feature.py neuorn
 
 ```
 
-#Example
+### Example
 ```bash
 Constructs training data and validation data for glia to prerain INTERACT model.
 
@@ -26,9 +43,9 @@ $python run_feature.py glia
 
 ```
 
-1.2 Pretrain INTERACT model
+### 1.2 Pretrain INTERACT model
 
-#Example
+### Example
 ```bash
 pretrain INTERACT model with methylation data from neuron using four GPUs
 
@@ -45,7 +62,7 @@ CUDA_VISIBLE_DEVICES=0,1,2,3 python3 -m torch.distributed.launch main.py transfo
         --model_config_file ./config/config.json
 ```
 
-#Example
+### Example
 ```bash
 Pretrain INTERACT model with methylation data from glia using four GPUs
 
@@ -63,11 +80,11 @@ CUDA_VISIBLE_DEVICES=0,1,2,3 python3 -m torch.distributed.launch main.py transfo
 ```
 
 
-2. Training
+## 2. Training
 
-2.1. Calculates methylations for CpGs for all cell types by their cells
+### 2.1. Calculate DNAm levels for CpG sites in pseudo-bulk of each specific cell type.
 
-#Example
+### Example
 ```bash
 Construct training data, validation data and test data for L23 to finetune INTERACT model.
 
@@ -75,9 +92,9 @@ $python run_feature.py L23
 
 ```
 
-2.2. Finetune INTERACT models for cell types. We finetuned a INTERACT model for each of the 13 brain cell types in our study. 
+### 2.2. Finetune pre-trained INTERACT models for each cell type. 
 
-#Example
+### Example
 ```bash
 finetune the INTERACT model for L23 using four GPUs from the pretrained neuron model
 
@@ -95,7 +112,7 @@ CUDA_VISIBLE_DEVICES=0,1,2,3 python3 -m torch.distributed.launch main.py transfo
 	--from_pretrained ./outputs/merge_eval/neuron
 ```
 
-#Example
+### Example
 ```bash
 finetune the INTERACT model for Astro using four GPUs from the pretrained glia model
 
@@ -113,10 +130,10 @@ CUDA_VISIBLE_DEVICES=0,1,2,3 python3 -m torch.distributed.launch main.py transfo
         --from_pretrained ./outputs/merge_eval/glia
 ```
 
-3. Prediction
+## 3. Prediction
 
-3.1. Predicts DNAm levels of CpG sites from DNA sequences with reference allel using one GPU.
-#Example
+### 3.1. Predict DNAm levels of CpG sites from DNA sequences with reference allele using one GPU.
+### Example
 ```bash
 predict DNAm levels of CpG sites from DNA sequences with reference allel for L23 using the finetuned INTERACT model
 
@@ -134,7 +151,7 @@ CUDA_VISIBLE_DEVICES=0 python3 main.py transformer array_mQTL_regression \
 	--split chr1
 ```
 
-#Example
+### Example
 ```bash
 predict DNAm levels of CpG sites from DNA sequences with variation allel for L23 using the finetuned INTERACT model
 
@@ -152,8 +169,8 @@ CUDA_VISIBLE_DEVICES=0 python3 main.py transformer array_mQTL_regression \
 	--split chr1
 ```
 
-3.2. Calculates absolute DNAm difference between DNA sequences with reference allel and that with variation allel.
-#Example
+### 3.2. Calculate absolute difference of DNAm levels between the two DNA sequences with reference and alternative alleles.
+### Example
 ```bash
 Calculates the absolute DNAm difference for CpGs in chromsome 1 for L23
 
