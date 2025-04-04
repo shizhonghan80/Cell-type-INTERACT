@@ -153,7 +153,7 @@ CUDA_VISIBLE_DEVICES=0 python3 main.py transformer array_mQTL_regression \
 
 ### Example
 ```bash
-predict DNAm levels of CpG sites from DNA sequences with variation allel for L23 using the finetuned INTERACT model
+predict DNAm levels of CpG sites from DNA sequences with variation allele for L23 using the finetuned INTERACT model
 
 CUDA_VISIBLE_DEVICES=0 python3 main.py transformer array_mQTL_regression \
 	--exp_name array_mQTL_regression \
