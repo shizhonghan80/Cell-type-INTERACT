@@ -29,7 +29,7 @@ h5py
 
 ### Example
 ```bash
-Construct training data and validation data for neuron to prerain INTERACT model.
+Construct training data and validation data for neuron to pretrain INTERACT model.
 
 $python run_feature.py neuorn
 
@@ -37,7 +37,7 @@ $python run_feature.py neuorn
 
 ### Example
 ```bash
-Constructs training data and validation data for glia to prerain INTERACT model.
+Constructs training data and validation data for glia to pretrain INTERACT model.
 
 $python run_feature.py glia
 
@@ -47,7 +47,7 @@ $python run_feature.py glia
 
 ### Example
 ```bash
-pretrain INTERACT model with methylation data from neuron using four GPUs
+pretrain INTERACT model with DNAm data from neuron using four GPUs
 
 CUDA_VISIBLE_DEVICES=0,1,2,3 python3 -m torch.distributed.launch main.py transformer wgbs_methylation_regression \
         --exp_name wgbs_methylation_regression \
@@ -64,7 +64,7 @@ CUDA_VISIBLE_DEVICES=0,1,2,3 python3 -m torch.distributed.launch main.py transfo
 
 ### Example
 ```bash
-Pretrain INTERACT model with methylation data from glia using four GPUs
+Pretrain INTERACT model with DNAm data from glia using four GPUs
 
 CUDA_VISIBLE_DEVICES=0,1,2,3 python3 -m torch.distributed.launch main.py transformer wgbs_methylation_regression \
         --exp_name wgbs_methylation_regression \
